@@ -79,6 +79,7 @@ class SettingsView: View {
         canvas.drawText("Theme", canvasWidth / 13f, (heightDivider * 5.3).toFloat(), snowPaint)
         canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 10, canvasWidth - (canvasWidth / 30f), heightDivider * 25, 30f, 30f, cardPaint)
         canvas.drawText("Subscription Plan", canvasWidth / 13f, (heightDivider * 11.3).toFloat(), snowPaint)
+        canvas.drawRoundRect(canvasWidth / 13f, heightDivider * 12, canvasWidth - (canvasWidth / 13f), heightDivider * 15, 30f, 30f, snowPaint)
     }
 
 }
