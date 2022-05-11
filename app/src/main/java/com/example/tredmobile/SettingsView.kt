@@ -22,6 +22,9 @@ class SettingsView: View {
     private val backgroundPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.FILL
         color = Color.rgb(41, 41, 41)
+        textSize = 20f * scaleValue
+        typeface = Typeface.SANS_SERIF
+        isFakeBoldText = true
     }
 
     private val cardPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -90,8 +93,11 @@ class SettingsView: View {
         canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 10, canvasWidth - (canvasWidth / 30f), heightDivider * 24, 30f, 30f, cardPaint)
         canvas.drawText("Subscription Plan", canvasWidth / 13f, (heightDivider * 11.3).toFloat(), snowPaint)
         canvas.drawRoundRect(canvasWidth / 13f, heightDivider * 12, canvasWidth - (canvasWidth / 13f), heightDivider * 15, 30f, 30f, snowPaint)
+        canvas.drawText("☒", canvasWidth - (canvasWidth / 6f), (heightDivider * 13.8).toFloat(), backgroundPaint)
         canvas.drawRoundRect(canvasWidth / 13f, heightDivider * 16, canvasWidth - (canvasWidth / 13f), heightDivider * 19, 30f, 30f, snowPaint)
+        canvas.drawText("☐", canvasWidth - (canvasWidth / 6f), (heightDivider * 17.8).toFloat(), backgroundPaint)
         canvas.drawRoundRect(canvasWidth / 13f, heightDivider * 20, canvasWidth - (canvasWidth / 13f), heightDivider * 23, 30f, 30f, snowPaint)
+        canvas.drawText("☐", canvasWidth - (canvasWidth / 6f), (heightDivider * 21.8).toFloat(), backgroundPaint)
     }
 
 }
