@@ -27,6 +27,48 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.06" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.55" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.784" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.023" />
+
     <com.example.tredmobile.HomeView
         android:id="@+id/homeView"
         android:layout_width="wrap_content"
@@ -37,11 +79,81 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="30sp"
-        android:layout_height="70dp"
+        android:id="@+id/tredLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxWidth="60dp"
+        android:layout_gravity="center"
+        android:maxHeight="61dp"
+        android:scaleType="fitCenter"
         app:layout_constraintStart_toEndOf="@id/guideline3"
         app:layout_constraintTop_toBottomOf="@id/guideline2"
         app:srcCompat="@drawable/ic_tred_man_logo" />
+
+    <ImageView
+        android:id="@+id/settingsLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxWidth="30dp"
+        android:layout_gravity="center"
+        android:maxHeight="30dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@id/guideline8"
+        app:layout_constraintTop_toBottomOf="@id/guideline9"
+        app:srcCompat="@drawable/ic_settings_logo" />
+
+    <ImageView
+        android:id="@+id/dailySteps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxWidth="60dp"
+        android:maxHeight="61dp"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@id/guideline4"
+        app:srcCompat="@drawable/ic_steps_logo" />
+
+    <ImageView
+        android:id="@+id/dailyDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxWidth="60dp"
+        android:maxHeight="61dp"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@id/guideline5"
+        app:srcCompat="@drawable/ic_walking_logo" />
+
+    <ImageView
+        android:id="@+id/weeklySteps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxWidth="60dp"
+        android:maxHeight="61dp"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@id/guideline6"
+        app:srcCompat="@drawable/ic_steps_logo" />
+
+    <ImageView
+        android:id="@+id/weeklyDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxWidth="60dp"
+        android:maxHeight="61dp"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@id/guideline7"
+        app:srcCompat="@drawable/ic_walking_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
