@@ -18,6 +18,7 @@ import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import android.widget.ImageView
+import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
 
@@ -45,6 +46,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         if (isPermissionGranted()) {
             requestPermission()
         }
+
+        convertDist()
 
         //initializing sensorManager instance
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -95,6 +98,13 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             tv_stepsTaken.text = ("$currentSteps")
             Log.d("MainActivity", event!!.values[0].toString())
         }
+    }
+
+    private fun convertDist() {
+
+        var milesWalked = findViewById<TextView>(R.id.milesWalked)
+
+        milesWalked.text = ((totalSteps*2.5f)/5280).toString()
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
