@@ -1,5 +1,7 @@
 package com.example.tredmobile
 
+
+
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
@@ -81,4 +83,6 @@ class HomeView: View {
         canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 16, canvasWidth - (canvasWidth / 30f), heightDivider * 22, 30f, 30f, cardPaint)
         canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 23, canvasWidth - (canvasWidth / 30f), heightDivider * 29, 30f, 30f, cardPaint)
     }
+
+
 }

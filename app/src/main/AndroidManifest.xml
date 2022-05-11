@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tredmobile">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/> <!-- //used for step counting -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!--//Allows for DB access-->
 
     <application
         android:allowBackup="true"
