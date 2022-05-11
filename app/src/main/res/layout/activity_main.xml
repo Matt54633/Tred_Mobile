@@ -76,6 +76,13 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.175" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.37" />
+
     <com.example.tredmobile.HomeView
         android:id="@+id/homeView"
         android:layout_width="wrap_content"
@@ -187,6 +194,6 @@
         android:text="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guideline5"/>
+        app:layout_constraintTop_toTopOf="@id/guideline11"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
