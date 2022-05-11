@@ -1,23 +1,12 @@
 package com.example.tredmobile
-//package com.ssaurel.stepcounter
 
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
-//import android.content.Context
-import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
-import android.hardware.SensorManager
-import android.os.Bundle
-//import android.support.v7.app.AppCompatActivity
-import android.widget.Toast
-//import kotlinx.android.synthetic.main.activity_main.*
+
+
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import android.util.Log
-
 
 class HomeView: View {
     constructor(context: Context?) : super(context)
@@ -74,8 +63,6 @@ class HomeView: View {
     companion object {
         const val LOGTAG = "MyTask"
     }
-
-
 
     //onDraw function
     override fun onDraw(canvas: Canvas) {
