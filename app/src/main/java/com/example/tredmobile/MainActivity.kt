@@ -18,6 +18,7 @@ import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import android.widget.ImageView
+import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
 
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             requestPermission()
         }
 
+
         //initializing sensorManager instance
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
     }
@@ -66,7 +68,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             Toast.makeText(this, "No sensor detected on this device", Toast.LENGTH_SHORT).show()
         } else {
             // register listener with sensorManager
-            sensorManager?.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_UI)
+            sensorManager?.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_FASTEST)
         }
     }
 
@@ -83,7 +85,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         var tv_stepsTaken = findViewById<TextView>(R.id.tv_stepsTaken)
 
 
-
         if (running) {
 
             //get the number of steps taken by the user.
@@ -93,9 +94,14 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
             // set current steps in textview
             tv_stepsTaken.text = ("$currentSteps")
+
+            var milesWalked = findViewById<TextView>(R.id.milesWalked)
+
+            milesWalked.text = String.format("%.2f", totalSteps*2.5f/5280) + "mi"
             Log.d("MainActivity", event!!.values[0].toString())
         }
     }
+
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         println("onAccuracyChanged: Sensor: $sensor; accuracy: $accuracy")

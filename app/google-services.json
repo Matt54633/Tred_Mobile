@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1091214609026",
+    "project_id": "tred-mobile-dfe36",
+    "storage_bucket": "tred-mobile-dfe36.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1091214609026:android:7e3e73df46c868241bc29b",
+        "android_client_info": {
+          "package_name": "com.example.tredmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1091214609026-ocdmuhmpc60c2e98gm7n4t0ue2cmt490.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUSvF8tm4fIGkhlZJ9B9mwpXkQzKn55TE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1091214609026-ocdmuhmpc60c2e98gm7n4t0ue2cmt490.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
