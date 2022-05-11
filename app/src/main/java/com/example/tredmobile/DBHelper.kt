@@ -27,7 +27,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
 
     override fun onUpgrade(db: SQLiteDatabase, p1: Int, p2: Int) {
         // this method is to check if table already exists
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME)
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
         onCreate(db)
     }
 
@@ -67,7 +67,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
 
         // below code returns a cursor to
         // read data from the database
-        return db.rawQuery("SELECT * FROM " + TABLE_NAME, null)
+        return db.rawQuery("SELECT * FROM $TABLE_NAME", null)
 
     }
 
@@ -75,27 +75,24 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         // here we have defined variables for our database
 
         // below is variable for database name
-        private val DATABASE_NAME = "Tred_Mobile"
+        private const val DATABASE_NAME = "Tred_Mobile"
 
         // below is the variable for database version
-        private val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 1
 
+        const val TABLE_NAME = "User"
 
-        val TABLE_NAME = "User"
+        const val ID_COL = "id"
 
+        const val FNAME_COl = "first_name"
 
-        val ID_COL = "id"
+        const val LNAME_COl = "last_name"
 
+        const val AGE_COL = "age"
 
-        val FNAME_COl = "first_name"
+        const val TBUCKS_COL = "tred_bucks"
 
-        val LNAME_COl = "last_name"
-
-        val AGE_COL = "age"
-
-        val TBUCKS_COL = "tred_bucks"
-
-        val EMAIL_COL = "email"
+        const val EMAIL_COL = "email"
 
     }
 }

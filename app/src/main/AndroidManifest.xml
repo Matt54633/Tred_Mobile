@@ -3,6 +3,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tredmobile">
 
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/> <!-- //used for step counting -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!--//Allows for DB access-->
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,6 +23,5 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!--//Allows for DB access-->
 
 </manifest>
