@@ -1,20 +1,35 @@
 package com.example.tredmobile
 
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
+import android.os.Build
+import android.widget.TextView
+import android.widget.Toast
 import android.content.Intent
 import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import android.widget.ImageView
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
 
     private var sensorManager: SensorManager? = null
 
+    // variable gives the running status
     private var running = false
 
+    // variable counts total steps
     private var totalSteps = 0f
 
-    private var previousTotalSteps = 0f
+    private val ACTIVITY_RECOGNITION_REQUEST_CODE = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,93 +41,99 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             startActivity(intent)
         }
 
-        loadData()
-        resetSteps()
+        //check if permission isn't already granted, request the permission
+        if (isPermissionGranted()) {
+            requestPermission()
+        }
 
-        Log.d("MainActivity", "created")
-
+        //initializing sensorManager instance
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
     }
 
     override fun onResume() {
+
         super.onResume()
         running = true
 
+        // TYPE_STEP_COUNTER:  A constant describing a step counter sensor
+        // Returns the number of steps taken by the user since the last reboot while activated
+        // This sensor requires permission android.permission.ACTIVITY_RECOGNITION.
         val stepSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
 
 
         if (stepSensor == null) {
-
+            // show toast message, if there is no sensor in the device
             Toast.makeText(this, "No sensor detected on this device", Toast.LENGTH_SHORT).show()
         } else {
-
-            Toast.makeText(this, "Sensor detected on this device", Toast.LENGTH_SHORT).show()
+            // register listener with sensorManager
             sensorManager?.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_UI)
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        running = false
+        // unregister listener
+        sensorManager?.unregisterListener(this)
+    }
+
     override fun onSensorChanged(event: SensorEvent?) {
 
-        val tv_stepsTaken = findViewById<TextView>(R.id.tv_stepsTaken)
+        // get textview by its id
+        var tv_stepsTaken = findViewById<TextView>(R.id.tv_stepsTaken)
+
+
 
         if (running) {
+
+            //get the number of steps taken by the user.
             totalSteps = event!!.values[0]
 
+            val currentSteps = totalSteps.toInt()
 
-            val currentSteps = totalSteps.toInt() - previousTotalSteps.toInt()
-
+            // set current steps in textview
             tv_stepsTaken.text = ("$currentSteps")
-
-            Log.d("MainActivity", "step taken")
+            Log.d("MainActivity", event!!.values[0].toString())
         }
-    }
-
-    private fun resetSteps() {
-        val tv_stepsTaken = findViewById<TextView>(R.id.tv_stepsTaken)
-        tv_stepsTaken.setOnClickListener {
-
-            Toast.makeText(this, "Long tap to reset steps", Toast.LENGTH_SHORT).show()
-        }
-
-        tv_stepsTaken.setOnLongClickListener {
-
-            previousTotalSteps = totalSteps
-
-
-            tv_stepsTaken.text = 0.toString()
-
-
-            saveData()
-
-            Log.d("MainActivity", "reset")
-
-            true
-        }
-    }
-
-    private fun saveData() {
-
-
-        val sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-
-        val editor = sharedPreferences.edit()
-        editor.putFloat("key1", previousTotalSteps)
-        editor.apply()
-    }
-
-    private fun loadData() {
-
-
-        val sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-        val savedNumber = sharedPreferences.getFloat("key1", 0f)
-
-
-        Log.d("MainActivity", "$savedNumber")
-
-        previousTotalSteps = savedNumber
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        // We do not have to write anything in this function for this app
+        println("onAccuracyChanged: Sensor: $sensor; accuracy: $accuracy")
+    }
+
+    private fun requestPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACTIVITY_RECOGNITION),
+                ACTIVITY_RECOGNITION_REQUEST_CODE
+            )
+        }
+    }
+
+    private fun isPermissionGranted(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACTIVITY_RECOGNITION
+        ) != PackageManager.PERMISSION_GRANTED
+    }
+
+    //handle requested permission result(allow or deny)
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            ACTIVITY_RECOGNITION_REQUEST_CODE -> {
+                if ((grantResults.isNotEmpty() &&
+                            grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                ) {
+                    // Permission is granted. Continue the action or workflow
+                    // in your app.
+                }
+            }
+        }
     }
 }
