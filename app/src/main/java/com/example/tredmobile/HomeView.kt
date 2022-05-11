@@ -51,6 +51,9 @@ class HomeView: View {
     private val snowPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.FILL
         color = Color.rgb(248, 243, 243)
+        textSize = 15f * scaleValue
+        typeface = Typeface.SANS_SERIF
+        isFakeBoldText = true
     }
 
     //canvas size
@@ -81,7 +84,9 @@ class HomeView: View {
         canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 4, canvasWidth - (canvasWidth / 30f), heightDivider * 9, 30f, 30f, cardPaint)
         canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 10, canvasWidth - (canvasWidth / 30f), heightDivider * 15, 30f, 30f, cardPaint)
         canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 16, canvasWidth - (canvasWidth / 30f), heightDivider * 22, 30f, 30f, cardPaint)
+        canvas.drawText("Weekly Steps", canvasWidth / 7f, (heightDivider * 17.3).toFloat(), snowPaint)
         canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 23, canvasWidth - (canvasWidth / 30f), heightDivider * 29, 30f, 30f, cardPaint)
+        canvas.drawText("Weekly Distance Walked", canvasWidth / 7f, (heightDivider * 24.3).toFloat(), snowPaint)
     }
 
 

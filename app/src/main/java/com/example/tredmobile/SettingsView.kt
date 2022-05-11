@@ -50,6 +50,9 @@ class SettingsView: View {
     private val snowPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.FILL
         color = Color.rgb(248, 243, 243)
+        textSize = 20f * scaleValue
+        typeface = Typeface.SANS_SERIF
+        isFakeBoldText = true
     }
 
     //canvas size
@@ -73,7 +76,9 @@ class SettingsView: View {
     private fun drawCards(canvas: Canvas) {
         val heightDivider: Float = canvasHeight / 30f
         canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 4, canvasWidth - (canvasWidth / 30f), heightDivider * 9, 30f, 30f, cardPaint)
+        canvas.drawText("Theme", canvasWidth / 13f, (heightDivider * 5.3).toFloat(), snowPaint)
         canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 10, canvasWidth - (canvasWidth / 30f), heightDivider * 25, 30f, 30f, cardPaint)
+        canvas.drawText("Subscription Plan", canvasWidth / 13f, (heightDivider * 11.3).toFloat(), snowPaint)
     }
 
 }
