@@ -55,6 +55,13 @@ class SettingsView: View {
         isFakeBoldText = true
     }
 
+    private val snowPaintSmall: Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.FILL
+        color = Color.rgb(248, 243, 243)
+        textSize = 15f * scaleValue
+        typeface = Typeface.SANS_SERIF
+    }
+
     //canvas size
     private val canvasHeight: Float
         get() = height.toFloat()
@@ -75,11 +82,16 @@ class SettingsView: View {
 
     private fun drawCards(canvas: Canvas) {
         val heightDivider: Float = canvasHeight / 30f
+        //theme card
         canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 4, canvasWidth - (canvasWidth / 30f), heightDivider * 9, 30f, 30f, cardPaint)
         canvas.drawText("Theme", canvasWidth / 13f, (heightDivider * 5.3).toFloat(), snowPaint)
-        canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 10, canvasWidth - (canvasWidth / 30f), heightDivider * 25, 30f, 30f, cardPaint)
+        canvas.drawText("Dark Mode: ☒", canvasWidth / 13f, (heightDivider * 7.2).toFloat(), snowPaintSmall)
+        //subscription plan card
+        canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 10, canvasWidth - (canvasWidth / 30f), heightDivider * 24, 30f, 30f, cardPaint)
         canvas.drawText("Subscription Plan", canvasWidth / 13f, (heightDivider * 11.3).toFloat(), snowPaint)
         canvas.drawRoundRect(canvasWidth / 13f, heightDivider * 12, canvasWidth - (canvasWidth / 13f), heightDivider * 15, 30f, 30f, snowPaint)
+        canvas.drawRoundRect(canvasWidth / 13f, heightDivider * 16, canvasWidth - (canvasWidth / 13f), heightDivider * 19, 30f, 30f, snowPaint)
+        canvas.drawRoundRect(canvasWidth / 13f, heightDivider * 20, canvasWidth - (canvasWidth / 13f), heightDivider * 23, 30f, 30f, snowPaint)
     }
 
 }

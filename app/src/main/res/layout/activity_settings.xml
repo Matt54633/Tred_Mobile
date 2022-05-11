@@ -34,6 +34,34 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.023" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.11" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.534" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.665" />
+
     <com.example.tredmobile.SettingsView
         android:id="@+id/settingsView"
         android:layout_width="wrap_content"
@@ -68,4 +96,43 @@
         app:layout_constraintStart_toEndOf="@id/guideline3"
         app:layout_constraintTop_toBottomOf="@id/guideline4"
         app:srcCompat="@drawable/ic_home_logo" />
+
+    <ImageView
+        android:id="@+id/tredFreeLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxWidth="70dp"
+        android:layout_gravity="center"
+        android:maxHeight="70dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@id/guideline5"
+        app:layout_constraintTop_toBottomOf="@id/guideline6"
+        app:srcCompat="@drawable/ic_tred_free_logo" />
+
+    <ImageView
+        android:id="@+id/tredPlusLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxWidth="70dp"
+        android:layout_gravity="center"
+        android:maxHeight="70dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@id/guideline5"
+        app:layout_constraintTop_toBottomOf="@id/guideline7"
+        app:srcCompat="@drawable/ic_tred_plus_logo" />
+
+    <ImageView
+        android:id="@+id/tredProLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxWidth="70dp"
+        android:layout_gravity="center"
+        android:maxHeight="70dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@id/guideline5"
+        app:layout_constraintTop_toBottomOf="@id/guideline8"
+        app:srcCompat="@drawable/ic_tred_pro_logo" />
 </androidx.constraintlayout.widget.ConstraintLayout>
