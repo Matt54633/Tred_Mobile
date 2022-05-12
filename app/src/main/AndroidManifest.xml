@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TredMobile">
         <activity
+            android:name=".RewardsActivity"
+            android:exported="false" />
+        <activity
             android:name=".HistoryActivity"
             android:exported="false" />
         <activity
