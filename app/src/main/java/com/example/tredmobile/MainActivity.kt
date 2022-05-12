@@ -19,6 +19,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import android.widget.ImageView
 import androidx.core.view.MotionEventCompat
+import java.lang.StringBuilder
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
 
@@ -32,6 +33,41 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     private val ACTIVITY_RECOGNITION_REQUEST_CODE = 100
 
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+
+        val action: Int = MotionEventCompat.getActionMasked(event)
+
+        return when (action) {
+            MotionEvent.ACTION_DOWN -> {
+                Log.d("MainActivity", "Action was DOWN")
+                true
+            }
+            MotionEvent.ACTION_MOVE -> {
+                Log.d("MainActivity", "Action was MOVE")
+                /*
+                val tmp = DBHelper(this, null)
+                Log.d("MainActivity", tmp.getAll()[0].fName.toString())
+                tmp.close()
+
+                 */
+                true
+            }
+            MotionEvent.ACTION_UP -> {
+                Log.d("MainActivity", "Action was UP")
+                true
+            }
+            MotionEvent.ACTION_CANCEL -> {
+                Log.d("MainActivity", "Action was CANCEL")
+                true
+            }
+            MotionEvent.ACTION_OUTSIDE -> {
+                Log.d("MainActivity", "Movement occurred outside bounds of current screen element")
+                true
+            }
+            else -> super.onTouchEvent(event)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -43,34 +79,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
-        override fun onTouchEvent(event: MotionEvent): Boolean {
 
-            val action: Int = MotionEventCompat.getActionMasked(event)
-
-            return when (action) {
-                MotionEvent.ACTION_DOWN -> {
-                    Log.d("MainActivity", "Action was DOWN")
-                    true
-                }
-                MotionEvent.ACTION_MOVE -> {
-                    Log.d("MainActivity", "Action was MOVE")
-                    true
-                }
-                MotionEvent.ACTION_UP -> {
-                    Log.d("MainActivity", "Action was UP")
-                    true
-                }
-                MotionEvent.ACTION_CANCEL -> {
-                    Log.d("MainActivity", "Action was CANCEL")
-                    true
-                }
-                MotionEvent.ACTION_OUTSIDE -> {
-                    Log.d("MainActivity", "Movement occurred outside bounds of current screen element")
-                    true
-                }
-                else -> super.onTouchEvent(event)
-            }
-        }
 
         //check if permission isn't already granted, request the permission
         if (isPermissionGranted()) {
@@ -80,6 +89,17 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         //initializing sensorManager instance
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+
+        //Database testing
+
+        val db1 = DBHelper(this, null)
+
+        db1.addUserData("John","Doe", "22", "tester@test.com",25) //TODO("Will Fail first run as DB isnt created first time first ever time app opened")
+
+        db1.close()
+
+        //
+
     }
 
     override fun onResume() {
@@ -172,4 +192,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             }
         }
     }
+
+
+
 }
