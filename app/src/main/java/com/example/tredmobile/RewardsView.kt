@@ -53,8 +53,9 @@ class RewardsView: View {
     private val snowPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.FILL
         color = Color.rgb(248, 243, 243)
-        textSize = 20f * scaleValue
+        textSize = 18f * scaleValue
         typeface = Typeface.SANS_SERIF
+        textAlign = Paint.Align.CENTER
         isFakeBoldText = true
     }
 
@@ -98,8 +99,20 @@ class RewardsView: View {
 
     private fun drawCards(canvas: Canvas) {
         val heightDivider: Float = canvasHeight / 30f
-        //theme card
-        canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 3, canvasWidth - (canvasWidth / 30f), heightDivider * 28, 30f, 30f, cardPaint)
+        //trophies earnt card
+        canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 3, canvasWidth - (canvasWidth / 30f), heightDivider * 5, 30f, 30f, cardPaint)
+        canvas.drawText("Across the last 7 day you earnt: 7 Trophies", canvasWidth / 2f, (heightDivider * 4.3).toFloat(), snowPaint)
+        //trophy display card
+        canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 6, canvasWidth - (canvasWidth / 30f), heightDivider * 11, 30f, 30f, cardPaint)
+        //wallet card
+        canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 12, canvasWidth - (canvasWidth / 30f), heightDivider * 14, 30f, 30f, cardPaint)
+        canvas.drawText("5 | Tred Bucks", canvasWidth / 2f, (heightDivider * 13.3).toFloat(), snowPaint)
+        //redeemable vouchers card
+        canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 15, canvasWidth - (canvasWidth / 30f), heightDivider * 21, 30f, 30f, cardPaint)
+        canvas.drawText("Redeemable Vouchers", canvasWidth / 2f, heightDivider * 16, snowPaint)
+        //redeemed vouchers card
+        canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 22, canvasWidth - (canvasWidth / 30f), heightDivider * 28, 30f, 30f, cardPaint)
+        canvas.drawText("My Vouchers", canvasWidth / 2f, heightDivider * 23, snowPaint)
     }
     private fun drawBottomNav(canvas: Canvas) {
         val xSep: Float  = canvasWidth / 20f

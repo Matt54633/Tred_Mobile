@@ -98,7 +98,7 @@ class HistoryView: View {
 
     private fun drawCards(canvas: Canvas) {
         val heightDivider: Float = canvasHeight / 30f
-        //theme card
+        //history card
         canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 3, canvasWidth - (canvasWidth / 30f), heightDivider * 28, 30f, 30f, cardPaint)
     }
 
