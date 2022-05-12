@@ -9,18 +9,22 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Build
-import android.os.Bundle
-import android.util.Log
-import android.view.MotionEvent
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.util.Log
+import android.view.GestureDetector
+import android.view.MotionEvent
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.MotionEventCompat
+import android.widget.ImageView
+import androidx.core.view.GestureDetectorCompat
+import kotlin.math.abs
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
+
+    private lateinit var detector: GestureDetectorCompat
 
     private var sensorManager: SensorManager? = null
 
@@ -31,51 +35,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private var totalSteps = 0f
 
     private val ACTIVITY_RECOGNITION_REQUEST_CODE = 100
-
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-
-        val action: Int = MotionEventCompat.getActionMasked(event)
-
-        return when (action) {
-            MotionEvent.ACTION_DOWN -> {
-                Log.d("MainActivity", "Action was DOWN")
-                true
-            }
-            MotionEvent.ACTION_MOVE -> {
-                Log.d("MainActivity", "Action was MOVE")
-                /*
-                val tmp = DBHelper(this, null)
-                Log.d("MainActivity", tmp.getAll()[0].fName.toString())
-                tmp.close()
-
-                 */
-                true
-            }
-            MotionEvent.ACTION_UP -> {
-                Log.d("MainActivity", "Action was UP")
-                true
-            }
-            MotionEvent.ACTION_CANCEL -> {
-                Log.d("MainActivity", "Action was CANCEL")
-                true
-            }
-            MotionEvent.ACTION_OUTSIDE -> {
-                Log.d("MainActivity", "Movement occurred outside bounds of current screen element")
-                true
-            }
-            else -> super.onTouchEvent(event)
-        }
-    }
-
-//    // MYSQL IMPLEMENTATION
-//
-//    private val url = "jdbc:mysql://192.168.0.192:3306/myDB"
-//    private val user = "s5210168"
-//    private val pass = "7FnKAEM9qK7Pe7jwVEWVCFxECd4hug9V"
-//    private val host = "db.bucomputing.uk";
-//    private val port  = 6612;
-//    private val database = user;
-//    private val tv_stepsTaken = findViewById<TextView>(R.id.tv_stepsTaken);
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -95,19 +54,90 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             requestPermission()
         }
 
+        detector = GestureDetectorCompat(this, MainGestureListener())
+
 
         //initializing sensorManager instance
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
         //Database testing
 
-        val db1 = DBHelper(this, null)
-
-        db1.addUserData("John","Doe", "22", "tester@test.com",25) //TODO("Will Fail first run as DB isnt created first time first ever time app opened")
-
-        db1.close()
+//        val db1 = DBHelper(this, null)
+//
+//        db1.addUserData("John","Doe", "22", "tester@test.com",25) //TODO("Will Fail first run as DB isnt created first time first ever time app opened")
+//
+//        db1.close()
 
         //
+
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        return if (detector.onTouchEvent(event)) {
+            true
+        }else{
+            super.onTouchEvent(event)
+        }
+    }
+
+    inner class MainGestureListener: GestureDetector.SimpleOnGestureListener(){
+
+        private val SwipeThreshold = 100
+        private val SwipeVelocityThreshold = 100
+
+        override fun onFling(
+            downEvent: MotionEvent?,
+            moveEvent: MotionEvent?,
+            velocityX: Float,
+            velocityY: Float
+        ): Boolean {
+            var diffX = downEvent?.let { moveEvent?.x?.minus(it.x) } ?: 0.0F
+            var diffY = moveEvent?.let { moveEvent.y.minus(it.y) } ?: 0.0F
+
+            return if (abs(diffX) > abs(diffY)) {
+                if (abs(diffX) > SwipeThreshold && abs(velocityX) > SwipeVelocityThreshold) {
+                    if (diffX > 0) {
+                        this@MainActivity.onSwipeRight()
+                    } else {
+                        this@MainActivity.onSwipeLeft()
+                    }
+                    true
+                } else {
+                    super.onFling(downEvent, moveEvent, velocityX, velocityY)
+                }
+            } else {
+                if (abs(diffY) > SwipeThreshold && abs(velocityY) > SwipeVelocityThreshold) {
+                    if (diffY > 0) {
+                        this@MainActivity.onSwipeDown()
+                    } else {
+                        this@MainActivity.onSwipeUp()
+                    }
+                    true
+                } else {
+                    super.onFling(downEvent, moveEvent, velocityX, velocityY)
+                }
+            }
+        }
+    }
+
+    private fun onSwipeUp() {
+        Toast.makeText(this, "swipe up", Toast.LENGTH_LONG).show()
+    }
+
+    private fun onSwipeDown() {
+        Toast.makeText(this, "swipe down", Toast.LENGTH_LONG).show()
+    }
+
+    private fun onSwipeLeft() {
+        //Toast.makeText(this, "swipe left", Toast.LENGTH_LONG).show()
+        val intent = Intent(this, RewardsActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun onSwipeRight() {
+        //Toast.makeText(this, "swipe right", Toast.LENGTH_LONG).show()
+        val intent = Intent(this, HistoryActivity::class.java)
+        startActivity(intent)
 
     }
 
@@ -157,7 +187,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             var milesWalked = findViewById<TextView>(R.id.milesWalked)
 
             milesWalked.text = String.format("%.2f", totalSteps*2.5f/5280) + "mi"
-            Log.d("MainActivity", event!!.values[0].toString())
+            Log.d("MainActivity", event.values[0].toString())
         }
     }
 
