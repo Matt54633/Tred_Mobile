@@ -41,4 +41,6 @@
         app:layout_constraintStart_toEndOf="@id/guideline1"
         app:layout_constraintTop_toBottomOf="@id/guideline2"
         app:srcCompat="@drawable/ic_tred_man_logo" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

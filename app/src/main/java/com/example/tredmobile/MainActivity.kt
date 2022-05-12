@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -21,6 +22,13 @@ import androidx.core.content.ContextCompat
 import android.widget.ImageView
 import androidx.core.view.GestureDetectorCompat
 import kotlin.math.abs
+import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.charts.CombinedChart
+import com.github.mikephil.charting.charts.CombinedChart.DrawOrder
+import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.components.YAxis
+import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.utils.ColorTemplate
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
 
@@ -35,6 +43,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private var totalSteps = 0f
 
     private val ACTIVITY_RECOGNITION_REQUEST_CODE = 100
+
+    lateinit var barList:ArrayList<BarEntry>
+
+    lateinit var barDataSet: BarDataSet
+    lateinit var barData: BarData
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -60,15 +73,20 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         //initializing sensorManager instance
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
-        //Database testing
+        barList = ArrayList()
+        barList.add(BarEntry(10f, 500f))
+        barList.add(BarEntry(20f, 400f))
+        barList.add(BarEntry(30f, 300f))
+        barList.add(BarEntry(40f, 200f))
+        barList.add(BarEntry(50f, 100f))
+        barDataSet= BarDataSet(barList, "Population")
+        barData= BarData(barDataSet)
+        barDataSet.setColors(ColorTemplate.JOYFUL_COLORS, 250)
+        var barchart = findViewById<BarChart>(R.id.barchart)
+        barchart.data = barData
+        barDataSet.valueTextColor= Color.BLACK
+        barDataSet.valueTextSize=30f
 
-//        val db1 = DBHelper(this, null)
-//
-//        db1.addUserData("John","Doe", "22", "tester@test.com",25) //TODO("Will Fail first run as DB isnt created first time first ever time app opened")
-//
-//        db1.close()
-
-        //
 
     }
 

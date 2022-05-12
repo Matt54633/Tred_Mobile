@@ -27,7 +27,7 @@ class RewardsActivity : AppCompatActivity() {
             super.onTouchEvent(event)
         }
     }
-    
+
     inner class RewardsGestureListener: GestureDetector.SimpleOnGestureListener(){
 
         private val SwipeThreshold = 100

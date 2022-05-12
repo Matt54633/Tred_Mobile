@@ -1,13 +1,17 @@
 package com.example.tredmobile
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.GestureDetector
 import android.view.MotionEvent
+import android.widget.Button
 import android.widget.Toast
 import androidx.core.view.GestureDetectorCompat
 import kotlin.math.abs
+
+
 
 class HistoryActivity : AppCompatActivity() {
 
@@ -16,6 +20,7 @@ class HistoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history)
+
 
         detector = GestureDetectorCompat(this, HistoryGestureListener())
     }
@@ -86,4 +91,5 @@ class HistoryActivity : AppCompatActivity() {
         Toast.makeText(this, "swipe right", Toast.LENGTH_LONG).show()
 
     }
+
 }
