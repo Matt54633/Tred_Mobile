@@ -4,25 +4,31 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.database.SQLException
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Build
-import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import android.widget.ImageView
 import androidx.core.view.GestureDetectorCompat
+import java.sql.Connection
+import java.sql.DriverManager
 import kotlin.math.abs
 
+
 class MainActivity : AppCompatActivity(), SensorEventListener {
+
+    val TAG = "spatula"
 
     private lateinit var detector: GestureDetectorCompat
 
