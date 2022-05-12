@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         var barchart = findViewById<BarChart>(R.id.barchart)
         barchart.data = barData
         barDataSet.valueTextColor= Color.BLACK
-        barDataSet.valueTextSize=30f
+        barDataSet.valueTextSize=15f
 
 
     }

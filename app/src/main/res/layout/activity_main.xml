@@ -83,6 +83,35 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.34" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.55" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.695" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.783" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.93" />
+
+
     <com.example.tredmobile.HomeView
         android:id="@+id/homeView"
         android:layout_width="wrap_content"
@@ -198,9 +227,11 @@
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/barchart"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="300dp"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:layout_width="327dp"
+        android:layout_height="101dp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline13"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="@id/guideline12"
+        app:layout_constraintVertical_bias="0.636" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
