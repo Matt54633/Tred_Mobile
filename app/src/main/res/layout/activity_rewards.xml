@@ -20,6 +20,48 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.23" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.55" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.785" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.14" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.52" />
+
     <com.example.tredmobile.RewardsView
         android:id="@+id/rewardsView"
         android:layout_width="wrap_content"
@@ -41,4 +83,69 @@
         app:layout_constraintStart_toEndOf="@id/guideline1"
         app:layout_constraintTop_toBottomOf="@id/guideline2"
         app:srcCompat="@drawable/ic_tred_man_logo" />
+
+    <ImageView
+        android:id="@+id/goldMedal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxWidth="80dp"
+        android:layout_gravity="center"
+        android:maxHeight="80dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@id/guideline6"
+        app:layout_constraintTop_toBottomOf="@id/guideline3"
+        app:srcCompat="@drawable/ic_gold_steps_medal" />
+
+    <ImageView
+        android:id="@+id/silverMedal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxWidth="80dp"
+        android:layout_gravity="center"
+        android:maxHeight="80dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@id/guideline7"
+        app:layout_constraintTop_toBottomOf="@id/guideline3"
+        app:srcCompat="@drawable/ic_silver_steps_medal" />
+
+    <ImageView
+        android:id="@+id/voucher_5_off"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxWidth="135dp"
+        android:layout_gravity="center"
+        android:maxHeight="135dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@id/guideline6"
+        app:layout_constraintTop_toBottomOf="@id/guideline4"
+        app:srcCompat="@drawable/ic_5_voucher" />
+
+    <ImageView
+        android:id="@+id/voucher_15_off"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxWidth="135dp"
+        android:layout_gravity="center"
+        android:maxHeight="135dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@id/guideline8"
+        app:layout_constraintTop_toBottomOf="@id/guideline4"
+        app:srcCompat="@drawable/ic_15_voucher" />
+
+    <ImageView
+        android:id="@+id/voucher_10_off"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxWidth="135dp"
+        android:layout_gravity="center"
+        android:maxHeight="135dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@id/guideline6"
+        app:layout_constraintTop_toBottomOf="@id/guideline5"
+        app:srcCompat="@drawable/ic_10_voucher" />
 </androidx.constraintlayout.widget.ConstraintLayout>
