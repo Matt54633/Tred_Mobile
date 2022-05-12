@@ -2,24 +2,23 @@ package com.example.tredmobile
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Build
-import android.widget.TextView
-import android.widget.Toast
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import android.widget.ImageView
 import androidx.core.view.MotionEventCompat
-import java.lang.StringBuilder
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
 
@@ -67,6 +66,16 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             else -> super.onTouchEvent(event)
         }
     }
+
+//    // MYSQL IMPLEMENTATION
+//
+//    private val url = "jdbc:mysql://192.168.0.192:3306/myDB"
+//    private val user = "s5210168"
+//    private val pass = "7FnKAEM9qK7Pe7jwVEWVCFxECd4hug9V"
+//    private val host = "db.bucomputing.uk";
+//    private val port  = 6612;
+//    private val database = user;
+//    private val tv_stepsTaken = findViewById<TextView>(R.id.tv_stepsTaken);
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
