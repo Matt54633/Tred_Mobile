@@ -13,19 +13,26 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     override fun onCreate(db: SQLiteDatabase) {
         // below is a sqlite query, where column names
         // along with their data types is given
+/*
         val query = ("CREATE TABLE " + TABLE_NAME + " ("
                 + ID_COL + " INTEGER PRIMARY KEY, " +
                 FNAME_COl + " TEXT," +
                 LNAME_COl + " TEXT," +
                 AGE_COL + " TEXT," +
                 EMAIL_COL + "TEXT," +
-                TBUCKS_COL + "INT," +")")
+                TBUCKS_COL + "INT" +")")
+
+ */
+        val query = ("CREATE TABLE " + TABLE_NAME + " ("
+                + ID_COL + " INTEGER PRIMARY KEY, " +
+                FNAME_COl + " TEXT," +
+                LNAME_COl + " TEXT" +")")
 
         //exec query with SQLite
         db.execSQL(query)
     }
 
-    override fun onUpgrade(db: SQLiteDatabase, p1: Int, p2: Int) {
+    override fun onUpgrade(db: SQLiteDatabase, oldVer: Int, newVer: Int) {
         // this method is to check if table already exists
         db.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
         onCreate(db)
@@ -39,12 +46,16 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
 
         // we are inserting our values
         // in the form of key-value pair
+        /*
         values.put(FNAME_COl, fName)
         values.put(LNAME_COl, lName)
         values.put(AGE_COL, age)
         values.put(EMAIL_COL, email)
         values.put(TBUCKS_COL, tBucks)
 
+         */
+        values.put(FNAME_COl, fName)
+        values.put(LNAME_COl, lName)
 
 
         //create writable version of DB
@@ -58,16 +69,32 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     }
 
     //get all data from Table
-    fun getAll(): Cursor? {
+    fun getAll(): List<userDataModel> {
+        val results = arrayListOf<userDataModel>()
 
         // here we are creating a readable
         // variable of our database
         // as we want to read value from it
-        val db = this.readableDatabase
+        val db = this.readableDatabase //MAYBE WRITEABLE?
 
         // below code returns a cursor to
         // read data from the database
-        return db.rawQuery("SELECT * FROM $TABLE_NAME", null)
+        val selectQuery = ("SELECT * FROM $TABLE_NAME")
+        val cursor = db.rawQuery(selectQuery, null)
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    val qResults = userDataModel()
+                    qResults.id = Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow(ID_COL)))
+                    qResults.fName = cursor.getString(cursor.getColumnIndexOrThrow(FNAME_COl))
+                    qResults.lName = cursor.getString(cursor.getColumnIndexOrThrow(LNAME_COl))
+                    results.add(qResults)
+                }while (cursor.moveToNext())
+            }
+        }
+        cursor.close()
+        return results
+
 
     }
 
