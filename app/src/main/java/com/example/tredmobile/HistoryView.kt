@@ -1,17 +1,18 @@
 package com.example.tredmobile
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.View
-import android.util.Log
 
-class HomeView: View {
+class HistoryView: View {
     constructor(context: Context?) : super(context)
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int)
             : super(context, attrs, defStyleAttr)
-
 
     //scale value
     private val scaleValue = context.resources.displayMetrics.density
@@ -21,6 +22,9 @@ class HomeView: View {
     private val backgroundPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.FILL
         color = Color.rgb(41, 41, 41)
+        textSize = 20f * scaleValue
+        typeface = Typeface.SANS_SERIF
+        isFakeBoldText = true
     }
 
     private val cardPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -41,12 +45,24 @@ class HomeView: View {
         isFakeBoldText = true
     }
 
+    private val bluePaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.FILL
+        color = Color.rgb(25, 123, 189)
+    }
+
     private val snowPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.FILL
+        color = Color.rgb(248, 243, 243)
+        textSize = 20f * scaleValue
+        typeface = Typeface.SANS_SERIF
+        isFakeBoldText = true
+    }
+
+    private val snowPaintSmall: Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.FILL
         color = Color.rgb(248, 243, 243)
         textSize = 15f * scaleValue
         typeface = Typeface.SANS_SERIF
-        isFakeBoldText = true
     }
 
     private val boldNavPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -68,11 +84,6 @@ class HomeView: View {
         get() = width.toFloat()
 
 
-    companion object {
-        const val LOGTAG = "MyTask"
-    }
-
-    //onDraw function
     override fun onDraw(canvas: Canvas) {
         canvas.drawRect(0f, 0f, canvasWidth, canvasHeight, backgroundPaint)
         drawTopBar(canvas)
@@ -82,17 +93,13 @@ class HomeView: View {
 
     private fun drawTopBar(canvas: Canvas) {
         canvas.drawRect(0f, 0f, canvasWidth, canvasHeight / 12f, snowPaint)
-        canvas.drawText("- Today -", canvasWidth / 2f, canvasHeight / 17f, orangeTextPaint)
+        canvas.drawText("- History -", canvasWidth / 2f, canvasHeight / 17f, orangeTextPaint)
     }
 
     private fun drawCards(canvas: Canvas) {
         val heightDivider: Float = canvasHeight / 30f
-        canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 3, canvasWidth - (canvasWidth / 30f), heightDivider * 8, 30f, 30f, cardPaint)
-        canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 9, canvasWidth - (canvasWidth / 30f), heightDivider * 14, 30f, 30f, cardPaint)
-        canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 15, canvasWidth - (canvasWidth / 30f), heightDivider * 21, 30f, 30f, cardPaint)
-        canvas.drawText("Weekly Steps", canvasWidth / 7f, (heightDivider * 16.3).toFloat(), snowPaint)
-        canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 22, canvasWidth - (canvasWidth / 30f), heightDivider * 28, 30f, 30f, cardPaint)
-        canvas.drawText("Weekly Distance Walked", canvasWidth / 7f, (heightDivider * 23.3).toFloat(), snowPaint)
+        //theme card
+        canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 3, canvasWidth - (canvasWidth / 30f), heightDivider * 28, 30f, 30f, cardPaint)
     }
 
     private fun drawBottomNav(canvas: Canvas) {
@@ -100,7 +107,7 @@ class HomeView: View {
         val offset: Float = canvasWidth / 2.22f
         var dotPaint: Paint
         for (i in 0 until 3) {
-            dotPaint = if (i == 0 || i == 2) {
+            dotPaint = if (i != 0) {
                 navPaint
             } else {
                 boldNavPaint
