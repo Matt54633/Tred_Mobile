@@ -77,6 +77,12 @@ class HistoryView: View {
         color = Color.rgb(117, 117, 117)
     }
 
+    private val linePaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        strokeCap = Paint.Cap.SQUARE
+        strokeWidth = 8f
+        color = Color.rgb(117, 117, 117)
+    }
+
     //canvas size
     private val canvasHeight: Float
         get() = height.toFloat()
@@ -100,6 +106,9 @@ class HistoryView: View {
         val heightDivider: Float = canvasHeight / 30f
         //history card
         canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 3, canvasWidth - (canvasWidth / 30f), heightDivider * 28, 30f, 30f, cardPaint)
+        for (i in 1 until 10) {
+            canvas.drawLine(canvasWidth / 15f, heightDivider * (3 + (i * 2.5f)), canvasWidth - (canvasWidth / 15f), heightDivider * (3 + (i * 2.5f)), linePaint)
+        }
     }
 
     private fun drawBottomNav(canvas: Canvas) {
