@@ -20,6 +20,14 @@ class RewardsActivity : AppCompatActivity() {
         detector = GestureDetectorCompat(this, RewardsGestureListener())
     }
 
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        return if (detector.onTouchEvent(event)) {
+            true
+        }else{
+            super.onTouchEvent(event)
+        }
+    }
+    
     inner class RewardsGestureListener: GestureDetector.SimpleOnGestureListener(){
 
         private val SwipeThreshold = 100
