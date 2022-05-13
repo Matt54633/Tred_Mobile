@@ -31,8 +31,6 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.math.abs
 
-
-
 class MainActivity : AppCompatActivity(), SensorEventListener {
 
     val tredMobilePath: String get() =  this.applicationInfo.dataDir.toString()
@@ -61,22 +59,15 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         setContentView(R.layout.activity_main)
 
-        //json
-
-
-
         //Log.d("Spatula", "Size: ${users.data.size}")
 
-
-
         createFile()
-        //json
+
         val settingsButton = findViewById<ImageView>(R.id.settingsLogo)
         settingsButton.setOnClickListener{
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
-
 
         //check if permission isn't already granted, request the permission
         if (isPermissionGranted()) {
@@ -85,6 +76,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         detector = GestureDetectorCompat(this, MainGestureListener())
 
+        // don't use step counter, use step detector and create a count from that
 
         //initializing sensorManager instance
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -221,8 +213,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         // TYPE_STEP_COUNTER:  A constant describing a step counter sensor
         // Returns the number of steps taken by the user since the last reboot while activated
         // This sensor requires permission android.permission.ACTIVITY_RECOGNITION.
-        val stepSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
-
+        val stepSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR)
 
         if (stepSensor == null) {
             // show toast message, if there is no sensor in the device
@@ -240,30 +231,16 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         sensorManager?.unregisterListener(this)
     }
 
-    override fun onSensorChanged(event: SensorEvent?) {
+    var steps: Int = 0;
 
-        // get textview by its id
+    override fun onSensorChanged(event: SensorEvent) {
         var tv_stepsTaken = findViewById<TextView>(R.id.tv_stepsTaken)
-
-
-        if (running) {
-
-            //get the number of steps taken by the user.
-            totalSteps = event!!.values[0]
-
-            val currentSteps = totalSteps.toInt()
-
-            // set current steps in textview
-            tv_stepsTaken.text = ("$currentSteps")
-
-            var milesWalked = findViewById<TextView>(R.id.milesWalked)
-
-            milesWalked.text = String.format("%.2f", totalSteps*2.5f/5280) + "mi"
-            Log.d("MainActivity", event.values[0].toString())
+        if (event.values[0] == 1f){
+            steps++
+            tv_stepsTaken.text = ("$steps")
+            Log.d("MainActivity", steps.toString())
         }
     }
-
-
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         println("onAccuracyChanged: Sensor: $sensor; accuracy: $accuracy")
     }
@@ -304,10 +281,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         }
     }
 
-
-    ///JSON FUNctions
-
-
+    //JSON FUNctions
 
 //Creates folder if not there and creates dummy data file to be later accessed.
 
@@ -330,7 +304,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
 
 
-
     fun lastDaySteps() {
         //TODO("grab the last entry from stepStorageFileJSON.json")
     }
@@ -338,9 +311,4 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     fun last7days() {
         //TODO ("Grab the last 7")
     }
-
-
-
-
-
 }
