@@ -95,6 +95,7 @@ class HistoryView: View {
         drawTopBar(canvas)
         drawCards(canvas)
         drawBottomNav(canvas)
+        drawHistoryData(canvas)
     }
 
     private fun drawTopBar(canvas: Canvas) {
@@ -122,6 +123,18 @@ class HistoryView: View {
                 boldNavPaint
             }
             canvas.drawPoint((i * xSep) + offset, canvasHeight - (canvasHeight / 35f), dotPaint)
+        }
+    }
+
+    private fun drawHistoryData(canvas: Canvas) {
+        val heightDivider: Float = canvasHeight / 30f
+        val stepsArray = arrayOf(6090, 2030, 12445, 4533, 9875, 12123, 5432, 3442, 8764, 8643)
+        val distanceArray = arrayOf(3.01, 1.03, 6.21, 2.26, 4.98, 6.10, 2.23, 1.53, 4.34, 4.30)
+        val datesArray = arrayOf("03-05-22", "04-05-22","05-05-22","06-05-22","07-05-22","08-05-22","09-05-22","10-05-22","11-05-22","12-05-22")
+        for (i in 0 until 10) {
+            canvas.drawText(datesArray[i], canvasWidth / 15f, heightDivider * ((i + 1.65f) * 2.5f), snowPaint)
+            canvas.drawText((stepsArray[i].toString() + " Steps"), canvasWidth / 15f, heightDivider * ((i + 2.05f) * 2.5f), snowPaintSmall)
+            canvas.drawText(distanceArray[i].toString() + " mi", canvasWidth / 2.8f, heightDivider * ((i + 2.05f) * 2.5f), snowPaintSmall)
         }
     }
 }

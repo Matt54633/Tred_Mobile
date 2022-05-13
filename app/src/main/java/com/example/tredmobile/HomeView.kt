@@ -92,7 +92,7 @@ class HomeView: View {
         canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 15, canvasWidth - (canvasWidth / 30f), heightDivider * 21, 30f, 30f, cardPaint)
         canvas.drawText("Weekly Steps", canvasWidth / 7f, (heightDivider * 16.3).toFloat(), snowPaint)
         canvas.drawRoundRect(canvasWidth / 30f, heightDivider * 22, canvasWidth - (canvasWidth / 30f), heightDivider * 28, 30f, 30f, cardPaint)
-        canvas.drawText("Weekly Distance Walked", canvasWidth / 7f, (heightDivider * 23.3).toFloat(), snowPaint)
+        canvas.drawText("Weekly Distance Walked (mi)", canvasWidth / 7f, (heightDivider * 23.3).toFloat(), snowPaint)
     }
 
     private fun drawBottomNav(canvas: Canvas) {
