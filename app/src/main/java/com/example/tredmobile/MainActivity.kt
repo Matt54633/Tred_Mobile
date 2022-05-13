@@ -206,14 +206,16 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         sensorManager?.unregisterListener(this)
     }
 
-    var steps: Int = 0;
+    var steps: Int = 1000;
 
     override fun onSensorChanged(event: SensorEvent) {
+        var milesWalked = findViewById<TextView>(R.id.milesWalked)
         var tv_stepsTaken = findViewById<TextView>(R.id.tv_stepsTaken)
         if (event.values[0] == 1f){
             steps++
             tv_stepsTaken.text = ("$steps")
             Log.d("MainActivity", steps.toString())
+            milesWalked.text = String.format("%.2f", steps*2.5f/5280) + "mi"
         }
     }
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
@@ -256,7 +258,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         }
     }
 
-    //JSON FUNctions
+    ///JSON FUNctions
+
 
 //Creates folder if not there and creates dummy data file to be later accessed.
 
