@@ -81,33 +81,58 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         //initializing sensorManager instance
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
+
         barList = ArrayList()
-        barList.add(BarEntry(10f, 500f))
-        barList.add(BarEntry(20f, 400f))
-        barList.add(BarEntry(30f, 300f))
-        barList.add(BarEntry(40f, 200f))
-        barList.add(BarEntry(50f, 100f))
-        barDataSet= BarDataSet(barList, "Population")
+        barList.add(BarEntry(10f, 6090f))
+        barList.add(BarEntry(15f, 2030f))
+        barList.add(BarEntry(20f, 12445f))
+        barList.add(BarEntry(25f, 4533f))
+        barList.add(BarEntry(30f, 9875f))
+        barList.add(BarEntry(35f, 12123f))
+        barList.add(BarEntry(40f, 5432f))
+        barDataSet= BarDataSet(barList, "Steps")
         barData= BarData(barDataSet)
-        barDataSet.setColors(ColorTemplate.JOYFUL_COLORS, 250)
+        barDataSet.setColor(Color.parseColor("#197BBD"), 255)
         var barchart = findViewById<BarChart>(R.id.barchart)
+        barData.barWidth = 2f
+        barchart.setTouchEnabled(false)
+        barchart.xAxis.textColor = Color.WHITE
+        barchart.xAxis.setDrawGridLines(false)
+        barchart.axisLeft.setDrawGridLines(false)
+        barchart.axisRight.setDrawGridLines(false)
+        barchart.legend.isEnabled = false
+        barchart.description.isEnabled = false
+        barchart.axisLeft.textColor = Color.WHITE
+        barchart.axisRight.textColor = Color.argb(0, 255, 255, 255)
         barchart.data = barData
-        barDataSet.valueTextColor= Color.BLACK
+        barDataSet.valueTextColor= Color.argb(0, 255, 255, 255)
         barDataSet.valueTextSize=15f
 
 
         barList = ArrayList()
-        barList.add(BarEntry(10f, 500f))
-        barList.add(BarEntry(20f, 400f))
-        barList.add(BarEntry(30f, 300f))
-        barList.add(BarEntry(40f, 200f))
-        barList.add(BarEntry(50f, 100f))
-        barDataSet= BarDataSet(barList, "Population")
+        barList.add(BarEntry(10f, 3.01f))
+        barList.add(BarEntry(15f, 1.03f))
+        barList.add(BarEntry(20f, 6.21f))
+        barList.add(BarEntry(25f, 2.26f))
+        barList.add(BarEntry(30f, 4.98f))
+        barList.add(BarEntry(35f, 6.10f))
+        barList.add(BarEntry(40f, 2.23f))
+        barDataSet= BarDataSet(barList, "Distance Walked")
         barData= BarData(barDataSet)
-        barDataSet.setColors(ColorTemplate.JOYFUL_COLORS, 250)
+        barDataSet.setColor(Color.parseColor("#197BBD"), 255)
         var barchart2 = findViewById<BarChart>(R.id.barchart2)
+        barData.barWidth = 2f
+        barchart2.setTouchEnabled(false)
+        barchart2.xAxis.textColor = Color.WHITE
+        barchart2.xAxis.setDrawGridLines(false)
+        barchart2.axisLeft.setDrawGridLines(false)
+        barchart2.axisRight.setDrawGridLines(false)
+        barchart2.legend.isEnabled = false
+        barchart2.description.isEnabled = false
+        barchart2.axisLeft.textColor = Color.WHITE
+        barchart2.axisRight.textColor = Color.argb(0, 255, 255, 255)
         barchart2.data = barData
-        barDataSet.valueTextColor= Color.BLACK
+        barDataSet.valueTextColor= Color.argb(0, 255, 255, 255)
         barDataSet.valueTextSize=15f
     }
 
