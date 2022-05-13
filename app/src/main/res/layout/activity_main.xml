@@ -241,4 +241,15 @@
         app:layout_constraintEnd_toEndOf="@+id/guideline16"
         app:layout_constraintVertical_bias="0.636" />
 
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/barchart2"
+        android:layout_width="327dp"
+        android:layout_height="101dp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline15"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintEnd_toEndOf="@+id/guideline16"
+        app:layout_constraintVertical_bias="0.636" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
