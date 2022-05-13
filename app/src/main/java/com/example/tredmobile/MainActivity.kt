@@ -10,26 +10,38 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Build
-import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import android.widget.ImageView
 import androidx.core.view.GestureDetectorCompat
-import kotlin.math.abs
 import com.github.mikephil.charting.charts.BarChart
-import com.github.mikephil.charting.charts.CombinedChart
-import com.github.mikephil.charting.charts.CombinedChart.DrawOrder
-import com.github.mikephil.charting.components.YAxis
-import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.google.gson.stream.JsonReader
+//import jdk.nashorn.internal.parser.JSONParser
+import org.json.JSONObject
+import java.io.*
+import java.nio.file.Files
+import java.nio.file.Paths
+import kotlin.math.abs
+
+
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
+
+    val tredMobilePath: String get() =  this.applicationInfo.dataDir.toString()
+    val tredStorageDir: String  get() = "$tredMobilePath/TredStorage"
 
     private lateinit var detector: GestureDetectorCompat
 
@@ -53,6 +65,18 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
+
+        //json
+        val jsonString = loadJson(this)
+        Log.d("tomato", jsonString.toString())
+
+
+        //Log.d("Spatula", "Size: ${users.data.size}")
+
+
+
+        createFile()
+        //json
 
         val settingsButton = findViewById<ImageView>(R.id.settingsLogo)
         settingsButton.setOnClickListener{
@@ -248,6 +272,122 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             }
         }
     }
+
+
+    ///JSON FUNctions
+    //does work, but had to give up working with the asset folder as they're read-only, which I discovered after 2 hours.
+    private fun loadJson(context: Context): String? {
+        var input: InputStream? = null
+        var jsonString: String
+
+        try {
+            // Create InputStream
+            input = context.assets.open("jsonData.json")
+
+            val size = input.available()
+
+            // Create a buffer with the size
+            val buffer = ByteArray(size)
+
+            // Read data from InputStream into the Buffer
+            input.read(buffer)
+
+            // Create a json String
+            jsonString = String(buffer)
+            return jsonString;
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        } finally {
+            // Must close the stream
+            input?.close()
+        }
+
+        return null
+    }
+    //original method of appending to list, this was fora 2 dimensional array
+    // from https://stackoverflow.com/questions/44416855/adding-json-objects-to-existing-json-file
+    fun addObject(path: String, name: String, value: String) {
+        val gson = Gson()
+        val reader: FileReader = FileReader(File(path))
+        val type = object : TypeToken<Map<String, String>>() {}.type
+        System.out.println("Type: " + type.toString())
+        val existingJson = gson.fromJson<Map<String, String>>(JsonReader(reader), type)
+        System.out.println("Existing Json: ${existingJson}")
+        val newJsonMap = existingJson.plus(Pair(name, value))
+        FileWriter(File(path)).use(
+            { writer -> writer.write(gson.toJson(newJsonMap)) }
+        )
+    }
+
+
+//Creates folder if not there and creates dummy data file to be later accessed.
+
+    fun createFile(){
+
+        val fileName = "stepStorageFileJSON.json"
+        val path = Paths.get(tredStorageDir)
+
+        if (tredStorageDir != null) {
+            if(!Files.isDirectory(path)){
+                Files.createDirectory(path)
+            }
+        }
+
+        val file = FileWriter("$tredStorageDir/$fileName/")
+        file.write("{\"User\":[{\"steps\":2000},{\"steps\":23454},{\"steps\":12345},{\"steps\":69},{\"steps\":8000}]}") //to give dummy data
+        file.flush()
+        file.close()
+
+    }
+
+    fun appendSteps() {
+
+        //TODO("
+        // Read in json file as an object
+        // Add a new entry to object
+        // convert back into string and rewrite file
+        // Was attempting with Gson and json-simple
+        // ")
+
+        class stepsTaken {
+            var steps: String? = null
+
+            constructor() : super() {}
+
+            constructor(
+                steps: String
+
+            ) : super() {
+                this.steps = steps
+
+            }
+        }
+        //I was unable to get JSONPARSER() working
+        //idea from https://stackoverflow.com/questions/54165223/appending-jsonobjects-when-writing-to-a-file
+        /*
+        val parser = JSONParser()
+        var stepsJson: JSONObject? = null
+        try {
+            stepsJson = parser.parse(FileReader("$tredStorageDir/stepStorageFileJSON.json"))
+        } catch (ex: ParseException) {
+            ex.printStackTrace()
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+        }
+
+         */
+
+    }
+
+    fun lastDaySteps() {
+        //TODO("grab the last entry from stepStorageFileJSON.json")
+    }
+
+    fun last7days() {
+        //TODO ("Grab the last 7")
+    }
+
+
 
 
 

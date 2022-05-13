@@ -1,17 +1,14 @@
 package com.example.tredmobile
 
+import com.google.gson.annotations.SerializedName
+
 class userDataModel {
-    var id : Int = 0
-    var fName : String = ""
-    var lName : String = ""
+    @SerializedName("name")
+    var name: String = ""
+
+
+    @SerializedName("age")
+    var age: Int = 0
 
 }
 
-/*
-+ ID_COL +
-FNAME_COl +
-LNAME_COl +
-AGE_COL + "
-EMAIL_COL +
-TBUCKS_COL
- */
