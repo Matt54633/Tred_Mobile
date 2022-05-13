@@ -231,7 +231,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         sensorManager?.unregisterListener(this)
     }
 
-    var steps: Int = 1000;
+    var steps: Int = 0;
 
     override fun onSensorChanged(event: SensorEvent) {
         var milesWalked = findViewById<TextView>(R.id.milesWalked)
