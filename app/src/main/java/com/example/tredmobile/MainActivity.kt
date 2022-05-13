@@ -31,8 +31,6 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.math.abs
 
-
-
 class MainActivity : AppCompatActivity(), SensorEventListener {
 
     val tredMobilePath: String get() =  this.applicationInfo.dataDir.toString()
@@ -63,11 +61,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         //json
 
-
-
         //Log.d("Spatula", "Size: ${users.data.size}")
-
-
 
         createFile()
         //json
@@ -238,7 +232,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         }
     }
 
-
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         println("onAccuracyChanged: Sensor: $sensor; accuracy: $accuracy")
     }
@@ -283,7 +276,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     ///JSON FUNctions
 
 
-
 //Creates folder if not there and creates dummy data file to be later accessed.
 
     fun createFile(){
@@ -305,7 +297,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
 
 
-
     fun lastDaySteps() {
         //TODO("grab the last entry from stepStorageFileJSON.json")
     }
@@ -313,9 +304,4 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     fun last7days() {
         //TODO ("Grab the last 7")
     }
-
-
-
-
-
 }
