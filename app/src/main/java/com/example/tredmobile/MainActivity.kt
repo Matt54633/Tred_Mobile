@@ -21,7 +21,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GestureDetectorCompat
+import kotlin.math.abs
 import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
@@ -46,7 +48,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     // variable counts total steps
     private var totalSteps = 0f
 
-    private val ACTIVITY_RECOGNITION_REQUEST_CODE = 100
+    private val ActivityRecognitionCode = 100
 
     lateinit var barList:ArrayList<BarEntry>
 
@@ -252,7 +254,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.ACTIVITY_RECOGNITION),
-                ACTIVITY_RECOGNITION_REQUEST_CODE
+                ActivityRecognitionCode
             )
         }
     }
@@ -272,7 +274,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
-            ACTIVITY_RECOGNITION_REQUEST_CODE -> {
+            ActivityRecognitionCode -> {
                 if ((grantResults.isNotEmpty() &&
                             grantResults[0] == PackageManager.PERMISSION_GRANTED)
                 ) {
