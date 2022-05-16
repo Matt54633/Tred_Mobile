@@ -3,6 +3,7 @@ package com.example.tredmobile
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.widget.Toast
@@ -69,16 +70,18 @@ class RewardsActivity : AppCompatActivity() {
     }
 
     private fun onSwipeUp() {
-        Toast.makeText(this, "swipe up", Toast.LENGTH_LONG).show()
+        //Toast.makeText(this, "swipe up", Toast.LENGTH_LONG).show()
+        Log.d("RewardsActivity", "swipe up")
     }
 
     private fun onSwipeDown() {
-        Toast.makeText(this, "swipe down", Toast.LENGTH_LONG).show()
+//        Toast.makeText(this, "swipe down", Toast.LENGTH_LONG).show()
+        Log.d("RewardsActivity", "swipe down")
     }
 
     private fun onSwipeLeft() {
-        Toast.makeText(this, "swipe left", Toast.LENGTH_LONG).show()
-
+//        Toast.makeText(this, "swipe left", Toast.LENGTH_LONG).show()
+        Log.d("RewardsActivity", "swipe left")
     }
 
     private fun onSwipeRight() {

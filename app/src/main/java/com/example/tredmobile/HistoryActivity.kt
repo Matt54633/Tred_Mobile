@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.widget.Button
@@ -74,11 +75,13 @@ class HistoryActivity : AppCompatActivity() {
     }
 
     private fun onSwipeUp() {
-        Toast.makeText(this, "swipe up", Toast.LENGTH_LONG).show()
+//        Toast.makeText(this, "swipe up", Toast.LENGTH_LONG).show()
+        Log.d("HistoryActivity", "swipe up")
     }
 
     private fun onSwipeDown() {
-        Toast.makeText(this, "swipe down", Toast.LENGTH_LONG).show()
+//        Toast.makeText(this, "swipe down", Toast.LENGTH_LONG).show()
+        Log.d("HistoryActivity", "swipe down")
     }
 
     private fun onSwipeLeft() {
@@ -88,8 +91,8 @@ class HistoryActivity : AppCompatActivity() {
     }
 
     private fun onSwipeRight() {
-        Toast.makeText(this, "swipe right", Toast.LENGTH_LONG).show()
-
+//        Toast.makeText(this, "swipe right", Toast.LENGTH_LONG).show()
+        Log.d("HistoryActivity", "swipe right")
     }
 
 }

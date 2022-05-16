@@ -35,18 +35,12 @@ import kotlin.math.abs
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
 
-    val tredMobilePath: String get() =  this.applicationInfo.dataDir.toString()
-    val tredStorageDir: String  get() = "$tredMobilePath/TredStorage"
-
     private lateinit var detector: GestureDetectorCompat
 
     private var sensorManager: SensorManager? = null
 
     // variable gives the running status
     private var running = false
-
-    // variable counts total steps
-    private var totalSteps = 0f
 
     private val ActivityRecognitionCode = 100
 
@@ -61,9 +55,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         setContentView(R.layout.activity_main)
 
-        //Log.d("Spatula", "Size: ${users.data.size}")
-
-        createFile()
 
         val settingsButton = findViewById<ImageView>(R.id.settingsLogo)
         settingsButton.setOnClickListener{
@@ -187,11 +178,13 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
 
     private fun onSwipeUp() {
-        Toast.makeText(this, "swipe up", Toast.LENGTH_LONG).show()
+        //Toast.makeText(this, "swipe up", Toast.LENGTH_LONG).show()
+        Log.d("MainActivity", "swipe up")
     }
 
     private fun onSwipeDown() {
-        Toast.makeText(this, "swipe down", Toast.LENGTH_LONG).show()
+        //Toast.makeText(this, "swipe down", Toast.LENGTH_LONG).show()
+        Log.d("MainActivity", "swipe down")
     }
 
     private fun onSwipeLeft() {
@@ -278,42 +271,10 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 if ((grantResults.isNotEmpty() &&
                             grantResults[0] == PackageManager.PERMISSION_GRANTED)
                 ) {
-                    // Permission is granted. Continue the action or workflow
-                    // in your app.
+                    // Permission is granted. Continue the action or workflow in app.
                 }
             }
         }
     }
 
-    ///JSON FUNctions
-
-
-//Creates folder if not there and creates dummy data file to be later accessed.
-
-    fun createFile(){
-
-        val fileName = "stepStorageFileJSON.json"
-        val path = Paths.get(tredStorageDir)
-
-        if (tredStorageDir != null) {
-            if(!Files.isDirectory(path)){
-                Files.createDirectory(path)
-            }
-        }
-
-        val file = FileWriter("$tredStorageDir/$fileName/")
-        file.write("{\"User\":[{\"steps\":2000},{\"steps\":23454},{\"steps\":12345},{\"steps\":69},{\"steps\":8000}]}") //to give dummy data
-        file.flush()
-        file.close()
-
-    }
-
-
-    fun lastDaySteps() {
-        //TODO("grab the last entry from stepStorageFileJSON.json")
-    }
-
-    fun last7days() {
-        //TODO ("Grab the last 7")
-    }
 }
